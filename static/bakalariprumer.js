@@ -1,7 +1,7 @@
 /*
 Name: Bakalari Actions
 Author: FHR; fhrnet.eu
-Last Updated: 2015/06/16
+Version: 1.1
 Licence: GPL v3
 */
 
