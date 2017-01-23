@@ -37,7 +37,7 @@ function calculateWeightedAvg() {
 	
 		jQuery(this).find(".detznamka").each(function() {
 			jQuery(this).find("td").not(".disabled").each(function() {
-				znamka = Number(jQuery(this).text().replace(/X/g,0).replace(/\?/g,0).replace(/U/g,0).replace(/N/g,0).replace(/A/g,0).replace(/1-/g,1.5).replace(/2-/g,2.5).replace(/3-/g,3.5).replace(/4-/g,4.5).replace(/-/g,0));
+				znamka = Number(jQuery(this).text().replace(/X/g,0).replace(/\?/g,0).replace(/U/g,0).replace(/N/g,0).replace(/A/g,0).replace(/1-/g,1.5).replace(/2-/g,2.5).replace(/3-/g,3.5).replace(/4-/g,4.5).replace(/-/g,0).replace(/!$/,''));
 				znamky.push(znamka);
 				sumznamky += znamka;
 			});
