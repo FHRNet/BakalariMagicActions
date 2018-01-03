@@ -59,7 +59,10 @@ function calculateWeightedAvg() {
 
 	console.log("Recalculated averages");
 }
-
+function addMark (znamka,vaha,element) {
+	jQuery(element).append('<div onclick="this.parentElement.removeChild(this); calculateWeightedAvg();" class="znamka-v" data-clasif="{&quot;vaha&quot;:' + vaha + ',&quot;MarkText&quot;:&quot;' + znamka + '&quot;}" style="background-color: #dfd; float: left; list-style: none; position: relative; width: 56px;"> <div class="cislovka maly"> <div class="ob">' + znamka + '</div> </div> <div class="bod"></div> <div class="dodatek"> <span>' + vaha + '</span><br>28.11.17 </div> </div>');
+	calculateWeightedAvg();
+}
 
 jQuery(document).ready(function() {
 	if(window.location.href.indexOf("prubzna.aspx") > -1) {
