@@ -66,7 +66,7 @@ function addMark (znamka,vaha,element) {
 	if (znamka < 1) {znamka = 1;}
 	if (vaha > 10) {vaha = 10;}
 	if (vaha < 1) {vaha = 1;}
-	jQuery(element).append('<div onclick="this.parentElement.removeChild(this); calculateWeightedAvg(); window.dispatchEvent(new Event('resize'));" class="znamka-v" data-clasif="{&quot;vaha&quot;:' + vaha + ',&quot;MarkText&quot;:&quot;' + znamka + '&quot;}" style="background-color: #dfd; float: left; list-style: none; position: relative; width: 56px;"> <div class="cislovka stredni"> <div class="ob">' + znamka + '</div> </div> <div class="bod"></div> <div class="dodatek"> <span>' + vaha + '</span><br>Právě teď </div> </div>');
+	jQuery(element).append('<div onclick="this.parentElement.removeChild(this); calculateWeightedAvg(); window.dispatchEvent(new Event(&quot;resize&quot;));" class="znamka-v" data-clasif="{&quot;vaha&quot;:' + vaha + ',&quot;MarkText&quot;:&quot;' + znamka + '&quot;}" style="background-color: #dfd; float: left; list-style: none; position: relative; width: 56px;"> <div class="cislovka stredni"> <div class="ob">' + znamka + '</div> </div> <div class="bod"></div> <div class="dodatek"> <span>' + vaha + '</span><br>Právě teď </div> </div>');
 	calculateWeightedAvg();
 	window.dispatchEvent(new Event('resize'));
 }
