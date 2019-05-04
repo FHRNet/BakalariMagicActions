@@ -76,7 +76,7 @@ function addMarkAdders () {
 }
 jQuery(document).ready(function() {
 	if(window.location.href.indexOf("prubzna.aspx") > -1) {
-		calculateWeightedAvg();
+		setTimeout(calculateWeightedAvg,1);
 		addMarkAdders();
 	}
 });
