@@ -9,68 +9,69 @@ Licence: GPL v3
 This version works with "Next", now a little better.
 */
 
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".info-text").forEach(e => {
+        e.style.width = "20em";
+        e.innerHTML = `
+            <div class="pridavac-znamek"> 
 
-document.querySelectorAll(".info-text").forEach(e => {
-    e.style.width = "20em";
-    e.innerHTML = `
-        <div class="pridavac-znamek"> 
+                <input type="number" min="1" max="5" step="0.5" required class="znamka-input" style="width: 2em; height: 2.5em;">
+                <input type="number" min="1" max="10" step="1" required class="vaha-input" style="width: 2em; height: 2.5em;">
+                <button data-id="${e.dataset.id}" style="width: 2.5em; height: 2.5em;">+</button>
+            </div>               
+            `;
+    });
+    document.querySelectorAll(".pridavac-znamek").forEach(e => e.onclick = (e) => {e.stopPropagation()});
+    document.querySelectorAll(".pridavac-znamek button").forEach(e => {
+        e.addEventListener("click", (event) => {
+            event.preventDefault();
+            const radek = document.querySelector("#" + e.dataset.id);
+            const znamky = radek.querySelector(".znamky");
+            const znamkaDiv = document.createElement("div");
+            const znamka = radek.querySelector(".znamka-input").value;
+            const vaha = radek.querySelector(".vaha-input").value;
+            if (vaha === "") {
+                e.parentElement.querySelector("input").focus();
+                return;
+            }
+            znamkaDiv.innerHTML = `
+                <div class='cislovka stredni'>
+                    <div class='ob'>${znamka.toString().replace(".5","-")}</div>
+                </div> 
+                <div class='bod'>
 
-            <input type="number" min="1" max="5" step="0.5" required class="znamka-input" style="width: 2em; height: 2.5em;">
-            <input type="number" min="1" max="10" step="1" required class="vaha-input" style="width: 2em; height: 2.5em;">
-            <button data-id="${e.dataset.id}" style="width: 2.5em; height: 2.5em;">+</button>
-        </div>               
-        `;
-});
-document.querySelectorAll(".pridavac-znamek").forEach(e => e.onclick = (e) => {e.stopPropagation()});
-document.querySelectorAll(".pridavac-znamek button").forEach(e => {
-    e.addEventListener("click", (event) => {
-        event.preventDefault();
-        const radek = document.querySelector("#" + e.dataset.id);
-        const znamky = radek.querySelector(".znamky");
-        const znamkaDiv = document.createElement("div");
-        const znamka = radek.querySelector(".znamka-input").value;
-        const vaha = radek.querySelector(".vaha-input").value;
-        if (vaha === "") {
-            e.parentElement.querySelector("input").focus();
-            return;
-        }
-        znamkaDiv.innerHTML = `
-            <div class='cislovka stredni'>
-                <div class='ob'>${znamka.toString().replace(".5","-")}</div>
-            </div> 
-            <div class='bod'>
-                
-            </div> 
-            <div class='dodatek'>
-                <p>${vaha}</p>
-                <p>Právě teď </p>
-            </div> 
-        `;
-        znamkaDiv.style.backgroundColor = '#dfd';
-        znamkaDiv.style.float = 'left';
-        znamkaDiv.style.listStyleType = 'none';
-        znamkaDiv.style.position = 'relative';
-        znamkaDiv.style.width = '56px';
-    
-        znamkaDiv.dataset.clasif = `
-        {
-            "vaha": ${vaha},
-            "MarkText": "${znamka.toString().replace(".5","-")}"
-        }
-        `;
-        znamkaDiv.dataset.vaha = vaha;
-        znamkaDiv.dataset.znamka = znamka;
-        
-        znamkaDiv.classList.add("znamka-v");
-        
-        znamkaDiv.addEventListener("click", (e) => {
-            znamkaDiv.parentElement.removeChild(znamkaDiv);
+                </div> 
+                <div class='dodatek'>
+                    <p>${vaha}</p>
+                    <p>Právě teď </p>
+                </div> 
+            `;
+            znamkaDiv.style.backgroundColor = '#dfd';
+            znamkaDiv.style.float = 'left';
+            znamkaDiv.style.listStyleType = 'none';
+            znamkaDiv.style.position = 'relative';
+            znamkaDiv.style.width = '56px';
+
+            znamkaDiv.dataset.clasif = `
+            {
+                "vaha": ${vaha},
+                "MarkText": "${znamka.toString().replace(".5","-")}"
+            }
+            `;
+            znamkaDiv.dataset.vaha = vaha;
+            znamkaDiv.dataset.znamka = znamka;
+
+            znamkaDiv.classList.add("znamka-v");
+
+            znamkaDiv.addEventListener("click", (e) => {
+                znamkaDiv.parentElement.removeChild(znamkaDiv);
+                calculateWeightedAvg();
+            });
+
+            znamky.append(znamkaDiv);
             calculateWeightedAvg();
+            window.dispatchEvent(new Event('resize'));
         });
-        
-        znamky.append(znamkaDiv);
-        calculateWeightedAvg();
-        window.dispatchEvent(new Event('resize'));
     });
 });
 
