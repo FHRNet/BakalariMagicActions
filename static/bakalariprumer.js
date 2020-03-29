@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".pridavac-znamek button").forEach(e => {
         e.addEventListener("click", (event) => {
             event.preventDefault();
-            const radek = document.querySelector("#" + e.dataset.id);
+            const radek = document.getElementById(e.dataset.id);
             const znamky = radek.querySelector(".znamky");
             const znamkaDiv = document.createElement("div");
             const znamka = radek.querySelector(".znamka-input").value;
